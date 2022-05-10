@@ -1,0 +1,44 @@
+/* Write your custom CSS here */
+.table>thead:first-child>tr:first-child>th {
+    border-top: 0;
+    font-size:12px !important;
+}
+.table td, .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 10px!important;
+    font-size:12px !important;
+}
+
+.login-bg
+{
+  background-image: url("../images/gallery/background.png") !important;
+  background-repeat: no-repeat;
+  background-attachment: fixed;        
+}
+
+.page-inner {
+    background: #f1f1f1;
+}
+
+.info-box .info-box-stats p {
+    color: #000000;
+}
+
+.top-menu .navbar-nav>li>a {
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.topmenu-outer {
+  background: linear-gradient(90deg,#487bdb,#0044cc);
+}
+
+.navbar .logo-box {
+    background: #487bdb;
+}
+
+.page-title {
+    padding: 20px;
+    background: #ffffff;
+    border-bottom: 1px solid #afafaf;
+    margin-top: 60px;
+}

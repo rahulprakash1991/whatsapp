@@ -1,0 +1,169 @@
+<div class="page-inner">
+	<div class="page-title">
+		<h3><?PHP echo $form_toptittle; ?></h3>
+		<div class="page-breadcrumb">
+			<ol class="breadcrumb">
+				<li><a href="<?php echo base_url();?>">Home</a></li>
+				<li class="active"><?PHP echo $form_toptittle; ?></li>
+			</ol>
+		</div>
+	</div>
+	
+		<div id="main-wrapper">
+			<?php
+			 if($notification)
+				{
+				?>
+				<div class="alert alert-success no-border successmessage">
+					<span class="text-semibold"> <?php echo $notification;?></span>
+				</div>
+				<?php
+			}
+			?>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-white">
+					
+						<div class="panel-body">
+							<div class="row">
+							<form  method="POST" action="<?php echo base_url();?>Report/Outstanding_payables"> 
+
+								<div class="col-md-3">
+									<div class="form-group <?PHP if(form_error('vendor_id')){ echo 'has-error';} ?>">
+										<label>Vendor Name <span1>*</span1></label>
+										<?php 
+										$attrib = 'class="bootstrap-select" data-live-search="true" data-width="100%" id="vendor_id" onChange="menu_terms(this.value)" onclick="calculate()"';
+										echo form_dropdown('vendor_id', $drop_menu_vendor, set_value('vendor_id', (isset($vendor_id)) ? $vendor_id : ''), $attrib);
+										?>
+										<label class="error"><?php echo form_error('vendor_id'); ?>
+										</label>
+									</div>
+								</div>
+								<div class="col-md-1">
+									<div class="form-group">
+									<br>
+										<input type="hidden" value="1" name="searchFilter">
+										<button type="submit" name="Submit" class="btn btn-primary">Submit</button>		
+									</div>
+								</div>
+								<?php echo form_close(); ?>
+							</div>
+						</div>
+					</div>
+						
+		
+			
+	<div class="panel panel-info" id='po_details'>                		
+         <div class="panel-body" >
+            <table class="table table-striped" > 
+            <a href="<?php echo base_url(); ?>outstanding_payable_export" target="_blank"  class="btn btn-success pull-right"><i class="fa fa-file-excel-o"></i> Export To Excel</a>
+			<a href="<?php echo base_url(); ?>outstanding_payable_export/print" target="_blank" class="btn btn-default pull-right"><i class="fa fa-print"></i> Print</a>                 
+                <thead>                                            
+                    <tr>
+                        <th>S.No</th>
+                        <th>Vendor Name</th>
+                        <th class="text-right">Outstanding Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                  
+                     $i=1;
+                        $totalPOAmount  =   0;
+                        $totalPOBalance =   0;
+                      
+                        foreach($menu_terms as $row)
+                        {
+                            $total   +=  $row['outstanding'];              
+                        ?>                                                  
+                              <tr> 
+                             <td>
+                                <?php echo $i++;?>
+                               
+                            </td>
+                            <td><?php echo $row['con_company_name']; ?></td>
+                            
+                          <td align="right">
+                   				  <a href="<?php echo base_url(); ?>Report/vendor_balance_sheet/<?php echo $row['vendor'];?>"><?php echo number_format($row['outstanding'],2); ?></a>
+                            </td>
+
+                        </tr>
+                        <?php
+                        }
+                        ?>
+                        <tr> 
+                             <td>
+                                
+                            </td>
+                            <td align="right"><strong> Total Outstanding Amount</strong></td>
+                            
+                            <td align="right">
+                                
+                                <strong> <?php echo number_format($total ,2); ?></strong> 
+                            </td>
+                        </tr>
+                                                                     
+                </tbody>
+            </table>
+
+    	</div>
+    </div> 
+	
+		</div>
+	</form>
+</div>
+	
+	
+
+<script>
+	function menu_terms(id)
+	{	
+		
+		$('#vendor_id').val(id);
+
+		$.ajax({
+			
+			type: "GET",
+			url: "<?php echo site_url('Report/menu_terms'); ?>", 
+			data: {vendor_id:id},
+			dataType:"html",
+			success: function(content)
+			{	
+				$('#po_details').html(content);
+				$('#payment_mode_id').select2();
+				$('#bank_id').select2();
+			},
+		});
+	}
+	
+	function paymentmode(val)
+	{
+
+		if($('#payment_mode_id').val() == 1)
+		{
+			$('.cash').css('display','block');
+			$("#trans_no").html("Voucher Number");								
+			$("#trans_date").html("Voucher Date");
+			$('#voucher_number').val('');
+			$('#paid_amount').val('');
+		}
+		if($('#payment_mode_id').val() == 2)
+		{
+			$('.cash').css('display','block');
+			$("#trans_no").html("Cheque Number");
+			$("#trans_date").html("Cheque Date");
+
+		
+		}
+		if($('#payment_mode_id').val() == 3)
+		{
+			$('.cash').css('display','block');
+			$("#trans_no").html("NEFT Number");
+			$("#trans_date").html("NEFT Date");
+
+		
+		}
+
+	}
+						
+</script>

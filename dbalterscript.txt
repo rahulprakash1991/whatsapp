@@ -1,0 +1,137 @@
+--02-11-2021
+
+ALTER TABLE `tbl_enquiry` CHANGE `enq_created_by` `enq_created_by` INT(11) UNSIGNED NOT NULL;
+
+
+///
+CREATE TABLE `users_passwords` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `user_id` int(11) UNSIGNED NOT NULL,
+  `password` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `updated_at` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `users_passwords`
+  ADD PRIMARY KEY (`id`);
+  
+  /// 03-11-2021
+  ALTER TABLE `users` CHANGE `passwd` `passwd` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+
+
+  INSERT INTO `tbl_preferences` (`pre_id`, `key`, `key_value`) VALUES (NULL, 'smtp_port', '8978');
+  INSERT INTO `tbl_preferences` (`pre_id`, `key`, `key_value`) VALUES (NULL, 'com_email', 'info@testcompany.com');
+  INSERT INTO `tbl_preferences` (`pre_id`, `key`, `key_value`) VALUES (NULL, 'com_pass', 'TestPass01');
+  INSERT INTO `tbl_preferences` (`pre_id`, `key`, `key_value`) VALUES (NULL, 'com_ssl', '0');
+
+
+09-11-2011
+
+ALTER TABLE `purchase_order` ADD `delivery_address` TEXT NOT NULL AFTER `po_created_on`;
+
+
+CREATE TABLE `table_vendor_address` (
+  `id` int(11) NOT NULL,
+  `vendor_id` int(11) NOT NULL,
+  `vendor_address` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+//10-11-2021
+
+
+
+INSERT INTO `tbl_preferences` (`pre_id`, `key`, `key_value`) VALUES (NULL, 'client_number', '1');
+INSERT INTO `tbl_preferences` (`pre_id`, `key`, `key_value`) VALUES (NULL, 'client_prefix', 'AGM/C/');
+INSERT INTO `tbl_preferences` (`pre_id`, `key`, `key_value`) VALUES (NULL, 'vendor_prefix', 'AGM/V/');
+INSERT INTO `tbl_preferences` (`pre_id`, `key`, `key_value`) VALUES (NULL, 'vendor_number', '1');
+
+ALTER TABLE `tbl_client` ADD `client_no` VARCHAR(255) NOT NULL AFTER `client_name`;
+ALTER TABLE `tbl_vendor` ADD `vendor_key` VARCHAR(255) NOT NULL AFTER `vendor_name`;
+
+
+
+CREATE TABLE `tbl_desgination` (
+  `desgination_id` int(11) NOT NULL,
+  `desgination_name` varchar(255) NOT NULL,
+  `desgination_status` int(11) NOT NULL,
+  `desgination_delete_status` int(11) NOT NULL DEFAULT '1',
+  `created_by` int(10) UNSIGNED NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_by` int(10) UNSIGNED NOT NULL,
+  `updated_on` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+CREATE TABLE `table_client_address` (
+  `id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `client_address` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+11-11-2021
+
+ALTER TABLE `table_client_address` ADD `area` VARCHAR(255) NOT NULL AFTER `client_address`;
+ALTER TABLE `table_client_address` ADD `city` VARCHAR(255) NOT NULL AFTER `area`;
+ALTER TABLE `table_client_address` ADD `state` VARCHAR(255) NOT NULL AFTER `city`;
+ALTER TABLE `table_client_address` ADD `post_code` VARCHAR(255) NOT NULL AFTER `state`;
+ALTER TABLE `table_client_address` ADD `country` VARCHAR(255) NOT NULL AFTER `post_code`;
+ALTER TABLE `table_client_address` ADD `phone` VARCHAR(255) NOT NULL AFTER `country`;
+ALTER TABLE `table_client_address` ADD `mobile` VARCHAR(255) NOT NULL AFTER `phone`;
+ALTER TABLE `table_client_address` ADD `email` VARCHAR(255) NOT NULL AFTER `mobile`;
+ALTER TABLE `table_client_address` ADD `fax` VARCHAR(255) NOT NULL AFTER `email`;
+ALTER TABLE `table_client_address` ADD `website` VARCHAR(255) NOT NULL AFTER `fax`;
+
+
+
+ALTER TABLE `table_vendor_address` ADD `area` VARCHAR(255) NOT NULL AFTER `vendor_address`;
+ALTER TABLE `table_vendor_address` ADD `city` VARCHAR(255) NOT NULL AFTER `area`;
+ALTER TABLE `table_vendor_address` ADD `state` VARCHAR(255) NOT NULL AFTER `city`;
+ALTER TABLE `table_vendor_address` ADD `post_code` VARCHAR(255) NOT NULL AFTER `state`;
+ALTER TABLE `table_vendor_address` ADD `country` VARCHAR(255) NOT NULL AFTER `post_code`;
+ALTER TABLE `table_vendor_address` ADD `phone` VARCHAR(255) NOT NULL AFTER `country`;
+ALTER TABLE `table_vendor_address` ADD `mobile` VARCHAR(255) NOT NULL AFTER `phone`;
+ALTER TABLE `table_vendor_address` ADD `email` VARCHAR(255) NOT NULL AFTER `mobile`;
+ALTER TABLE `table_vendor_address` ADD `fax` VARCHAR(255) NOT NULL AFTER `email`;
+ALTER TABLE `table_vendor_address` ADD `website` VARCHAR(255) NOT NULL AFTER `fax`;
+
+
+
+ALTER TABLE `tbl_client` ADD `assign_vender` INT NOT NULL DEFAULT '0' AFTER `client_delete_status`;
+
+12-11-2021
+ALTER TABLE `tbl_vendor` CHANGE `vendor_updatedBy` `vendor_updatedBy` INT(255) UNSIGNED NOT NULL;
+ALTER TABLE `tbl_vendor` CHANGE `vendor_createdBy` `vendor_createdBy` INT(255) UNSIGNED NOT NULL;
+ALTER TABLE `tbl_client` CHANGE `client_createdBy` `client_createdBy` INT(255) UNSIGNED NOT NULL;
+ALTER TABLE `tbl_client` CHANGE `client_updatedBy` `client_updatedBy` INT(11) UNSIGNED NOT NULL;
+
+ALTER TABLE `tbl_vendor` ADD `asClient` INT NOT NULL DEFAULT '0' AFTER `credit_amount`;
+
+
+
+
+CREATE TABLE `vendor_id_management` (
+  `id` int(11) NOT NULL,
+  `vendor_id_name` varchar(255) NOT NULL,
+  `vendor_id_status` int(11) NOT NULL,
+  `vendor_id_delete_status` int(11) NOT NULL DEFAULT '1',
+  `created_by` int(10) UNSIGNED NOT NULL,
+  `created_on` datetime NOT NULL,
+  `updated_by` int(10) UNSIGNED NOT NULL,
+  `updated_on` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+ALTER TABLE `tbl_client` ADD `client_area` VARCHAR(255) NOT NULL AFTER `assign_vender`;
+
+ALTER TABLE `tbl_client` ADD `client_city` VARCHAR(255) NOT NULL AFTER `client_area`;
+ALTER TABLE `tbl_client` ADD `client_state` VARCHAR(255) NOT NULL AFTER `client_city`;
+ALTER TABLE `tbl_client` ADD `client_zip` VARCHAR(255) NOT NULL AFTER `client_state`;
+ALTER TABLE `tbl_client` ADD `client_country` VARCHAR(255) NOT NULL AFTER `client_zip`;
+
+ALTER TABLE `tbl_vendor` ADD `vendor_area` VARCHAR(255) NOT NULL AFTER `asClient`;
+ALTER TABLE `tbl_vendor` ADD `vendor_city` VARCHAR(255) NOT NULL AFTER `vendor_area`;
+ALTER TABLE `tbl_vendor` ADD `vendor_state` VARCHAR(255) NOT NULL AFTER `vendor_city`;
+ALTER TABLE `tbl_vendor` ADD `vendor_zip` VARCHAR(255) NOT NULL AFTER `vendor_state`;
+ALTER TABLE `tbl_vendor` ADD `vendor_country` VARCHAR(255) NOT NULL AFTER `vendor_zip`;
