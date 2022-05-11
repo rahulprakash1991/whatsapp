@@ -10,7 +10,7 @@ class cron_job_cnt extends CI_Controller {
 	    $this->load->model('cron_job_model');
  		$this->cron_job_model->cron_job(); 
 
-             // $email = "rahulprakash42@gmail.com";
+             $email = "rahulprakash42@gmail.com";
              // $e_host='ssl://smtp.googlemail.com';
              //            $e_port='465';
              //            $e_user='rahulrithu2016@gmail.com';
