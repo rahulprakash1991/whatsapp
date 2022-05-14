@@ -1,15 +1,12 @@
-name: publich to cpanal
-on:
-push:
-branches:
-- master
-jobs:
-FTP-Deploye-Action:
--name: FTP-Deploye-Action
-runs_on: ubuntu-latest
-steps:
-      - uses: actions/checkout@v2.1.0
-with:
-ftp-server: ${{ secrets.FTP_SERVER }}
-ftp-username: ${{ secrets.FTP_USERNAME }}
-ftp-password: ${{ secrets.FTP_PASSWORD}}
+--- 
+execution:
+- concurrency: 50
+hold-for: 3m
+ramp-up: 2m
+scenario: Choose Flieght
+scenarios:
+Choose Flight:
+requests:
+- label:test
+method: POST
+url: http://testing.agmtechnical.com/
