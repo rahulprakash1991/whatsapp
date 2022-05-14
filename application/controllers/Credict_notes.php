@@ -26,7 +26,6 @@ class Credict_notes extends MY_Controller {
 		if($this->require_min_level(1))
         {
 
-
         	$cur_languege = $this->session->userdata('site_lang');
         	// print_r($cur_languege);die;
 			// $msg['form_url']			=	'masters/Client/add';
