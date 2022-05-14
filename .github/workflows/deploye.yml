@@ -4,15 +4,10 @@ push:
 branches: 
 - master
 jobs:
-FTP-Deploye-Action:
-name: FTP-Deploye-Action
+name: FTP-Deploye-Action1
 runs_on: ubuntu-latest
 steps:
       - uses: actions/checkout@v2.1.0
-with:
-fetch-depth: 2
-- name: FTP-Deploye-Action
-uses: SamKirland/FTP-Deploy-Action@3.1.1
 with:
 ftp-server: ${{ secrets.FTP_SERVER }}
 ftp-username: ${{ secrets.FTP_USERNAME }}
