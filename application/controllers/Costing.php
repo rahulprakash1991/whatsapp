@@ -23,6 +23,8 @@ class Costing extends MY_Controller {
 	{  
 		if($this->require_min_level(1))
         {
+        	
+        	// this is for testing
 			$msg['form_url']		=	'Costing/add';
 	        $msg['form_tittle']		=	'Costing Management';
 	        $msg['form_toptittle']	=	'Costing Management';
